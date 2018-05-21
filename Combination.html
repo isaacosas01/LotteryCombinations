@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Combination</title>
+
+    <link href="styles/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    
+    
+        <div id="Combination" class="col-md-8">
+                <!-- <button onclick='deleteContact(event);'>Delete<botton> -->
+                    hello
+    
+            </div>
+
+    <script>
+
+     
+
+        const k_combinations = (set, k) => {
+                if (k > set.length || k <= 0) {
+                    return []
+                }
+                if (k === set.length) {
+                    return [set]
+                }
+                const combs = []
+                if (k === 1) {
+                    for (let i = 0; i < set.length; i++) {
+                        combs.push([set[i]])
+                    }
+                    return combs
+                }
+                for (let i = 0; i < set.length - k + 1; i++) {
+                    const head = set.slice(i, i + 1)
+                    const tailcombs = k_combinations(set.slice(i + 1), k - 1)
+                    for (let j = 0; j < tailcombs.length; j++) {
+                        combs.push(head.concat(tailcombs[j]))
+                    }
+                }
+                return combs
+            }
+
+            const combinations = (set) => {
+                const combs = [];
+                for (let k = 1; k <= set.length; k++) {
+                    const k_combs = k_combinations(set, k)
+                    for (let i = 0; i < k_combs.length; i++) {
+                        combs.push(k_combs[i])
+                    }
+                }
+                return combs
+            }
+
+            var i = 0;
+            var j = 0;
+            function displaytable(combs){
+                let container = document.querySelector('#Combination');
+                container.innerHTML += "<p>js</p>";
+
+                let table = document.createElement("table");
+                let thead = document.createElement("thead");
+                let row = table.insertRow();
+                row.innerHTML =  "<th>Combinations</th>";
+
+                table.setAttribute('class',"table table-striped");
+                
+                for(;  (i < combs.length) && (i < j + 300) ; i++ ){
+                    let row = table.insertRow();
+                   row.innerHTML = "<td>"+ "<b>" + i + "</b>" + combs[i] + "</td>";
+                }
+
+                j = i;
+
+                // combs.forEach(function(comb) {
+                //     let row = table.insertRow();
+                //     row.innerHTML = "<td>"+ comb + "</td>";
+                // });
+                // adds the table to the div
+                container.appendChild(table);
+            }
+
+            
+            var set = []
+            for(let i = 1; i <11 ; i++){
+               set.push(i);
+            }
+
+            var isaac = k_combinations(set,6);
+            displaytable(isaac);
+
+            $(window).scroll(function () {
+                    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                        // ajax call get data from server and append to the div
+                        displaytable(isaac);
+                    }
+                });
+        
+                $('#Combination').on('scroll', function() {
+        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            alert('end reached');
+        }
+        });
+
+    </script>
+</body>
+</html>
