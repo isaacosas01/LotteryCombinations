@@ -56,8 +56,9 @@
                 return combs
             }
 
-            var i = 0;
-            var j = 0;
+            // var i = 0;
+            // var j = 0;
+
             function displaytable(combs){
                 let container = document.querySelector('#Combination');
                 container.innerHTML += "<p>js</p>";
@@ -69,18 +70,18 @@
 
                 table.setAttribute('class',"table table-striped");
                 
-                for(;  (i < combs.length) && (i < j + 300) ; i++ ){
-                    let row = table.insertRow();
-                   row.innerHTML = "<td>"+ "<b>" + i + "</b>" + combs[i] + "</td>";
-                }
-
-                j = i;
-
-                // combs.forEach(function(comb) {
+                // for(;  (i < combs.length) && (i < j + 300) ; i++ ){
                 //     let row = table.insertRow();
-                //     row.innerHTML = "<td>"+ comb + "</td>";
-                // });
-                // adds the table to the div
+                //    row.innerHTML = "<td>"+ "<b>" + i + "</b>" + combs[i] + "</td>";
+                // }
+
+                // j = i;
+
+                combs.forEach(function(comb) {
+                    let row = table.insertRow();
+                    row.innerHTML = "<td>" + comb + "</td>";
+                });
+                //adds the table to the div
                 container.appendChild(table);
             }
 
@@ -93,18 +94,18 @@
             var isaac = k_combinations(set,6);
             displaytable(isaac);
 
-            $(window).scroll(function () {
-                    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-                        // ajax call get data from server and append to the div
-                        displaytable(isaac);
-                    }
-                });
+        //     $(window).scroll(function () {
+        //             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+        //                 // ajax call get data from server and append to the div
+        //                 displaytable(isaac);
+        //             }
+        //         });
         
-                $('#Combination').on('scroll', function() {
-        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-            alert('end reached');
-        }
-        });
+        //         $('#Combination').on('scroll', function() {
+        // if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+        //     alert('end reached');
+        // }
+        // });
 
     </script>
 </body>
