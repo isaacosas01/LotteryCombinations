@@ -90,12 +90,13 @@
              * Here i have two variables TOTAL_SIZE (it contains the total size of records you want to load) and
              * CHUNK-SIZE (it contains the chunk you want to load at a time. It is advised to load the data in small chunks).
              */
-            const TOTAL_SIZE = 50;
-            const CHUNK_SIZE = 10; 
+            const TOTAL_SIZE = 50; // ** I think this is might be redunant but no be the koko be dat
+            const CHUNK_SIZE = 49; // ** so i increased the size now to what it should be 49, it does work again, it was 10 as sent you
             let displayInChunks = (totalSize, chunkSize) =>{
                 if(totalSize > 0){
                     let set = [];
-                    Array.from({length: chunkSize}, (x,i) => set.push(i));
+                    Array.from({length: chunkSize}, (x,i) => set.push(i+1)); // I added this become the array has to be spread between 1 - 49
+                    console.log(set); // ** this was for testing purpose to see the range of number set holds
                     let isaac = k_combinations(set,6);
                     displaytable(isaac);
                     displayInChunks(totalSize - chunkSize, chunkSize);
