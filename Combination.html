@@ -18,9 +18,6 @@
             </div>
 
     <script>
-
-     
-
         const k_combinations = (set, k) => {
                 if (k > set.length || k <= 0) {
                     return []
@@ -59,7 +56,11 @@
             // var i = 0;
             // var j = 0;
 
-            function displaytable(combs){
+            /**
+            * What i a trying to achieve is load the data asynchronously in chunks so that it does not slow
+            * down or stop the loading of the page.
+            */
+            async function displaytable(combs){
                 let container = document.querySelector('#Combination');
                 container.innerHTML += "<p>js</p>";
 
@@ -82,18 +83,28 @@
                     row.innerHTML = "<td>" + comb + "</td>";
                 });
                 //adds the table to the div
-                container.appendChild(table);
+                await container.appendChild(table);
             }
-
             
-            var set = []
-            for(let i = 1; i <11 ; i++){
-               set.push(i);
-            }
+            /**
+             * Here i have two variables TOTAL_SIZE (it contains the total size of records you want to load) and
+             * CHUNK-SIZE (it contains the chunk you want to load at a time. It is advised to load the data in small chunks).
+             */
+            const TOTAL_SIZE = 50;
+            const CHUNK_SIZE = 10; 
+            let displayInChunks = (totalSize, chunkSize) =>{
+                if(totalSize > 0){
+                    let set = [];
+                    Array.from({length: chunkSize}, (x,i) => set.push(i));
+                    let isaac = k_combinations(set,6);
+                    displaytable(isaac);
+                    displayInChunks(totalSize - chunkSize, chunkSize);
+                }
+            };
 
-            var isaac = k_combinations(set,6);
-            displaytable(isaac);
-
+            displayInChunks(TOTAL_SIZE, CHUNK_SIZE);
+            
+            
         //     $(window).scroll(function () {
         //             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
         //                 // ajax call get data from server and append to the div
@@ -106,6 +117,22 @@
         //     alert('end reached');
         // }
         // });
+
+        /* new changes */
+        // SETTINGS
+
+// Generate test data
+var testData = (function() {
+  var result = [];
+  for (var i = 0; i < DATA_LENGTH; i += 1) {
+    result.push("Item " + i);
+  }
+  return result;
+}());
+
+var clearList = function() {
+  list.innerHTML = "";
+};
 
     </script>
 </body>
