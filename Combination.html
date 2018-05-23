@@ -9,11 +9,34 @@
     <link href="styles/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+
+    <h1> Possible Combination of numbers</h1>
+
+    <p> This app combines numbers in ranges of six, which means the end range must be equal to greater than 6 </p>
     
+    <div class="row">
+        <div class="col-md-4">
+            <form role="form" onsubmit="return formSubmitted();">
+                <div class="form-group">
+                    <label for="startRange">Starting Range:</label>
+                    <input type="text" class="form-control" id="startRange">
+                </div> 
+                
+                <div class="form-group">
+                    <label for="endRange">Ending Range:</label>
+                    <input type="number" class="form-control" id="endRange">
+                </div>
+
+               
+
+                <button type="submit" class="btn btn-default" >Submit</button>
+            </form>
+        </div>
+
     
         <div id="Combination" class="col-md-8">
                 <!-- <button onclick='deleteContact(event);'>Delete<botton> -->
-                    hello
+                  
     
             </div>
 
@@ -62,7 +85,8 @@
             */
             async function displaytable(combs){
                 let container = document.querySelector('#Combination');
-                container.innerHTML += "<p>js</p>";
+
+                container.innerHTML = "";
 
                 let table = document.createElement("table");
                 let thead = document.createElement("thead");
@@ -93,7 +117,7 @@
 
              // can't figure out the work of this but the total size of the set array is 49
             const TOTAL_SIZE = 49; // ** I think this is might be redunant but no be the koko be dat
-            const CHUNK_SIZE = 49; // ** so i increased the size now to what it should be 49, it does work again, it was 10 as sent you
+            const CHUNK_SIZE = 49; // ** So i increased the size now to what it should be 49, it does work again, it was 10 as sent you
             let displayInChunks = (totalSize, chunkSize) =>{
                 if(totalSize > 0){
                     let set = [];
@@ -101,11 +125,11 @@
                     console.log(set); // ** this was for testing purpose to see the range of number set holds
                     let isaac = k_combinations(set,6);
                     displaytable(isaac);
-                    displayInChunks(totalSize - chunkSize, chunkSize);
+                    //displayInChunks(totalSize - chunkSize, chunkSize);
                 }
             };
 
-            displayInChunks(TOTAL_SIZE, CHUNK_SIZE);
+           // displayInChunks(TOTAL_SIZE, CHUNK_SIZE);
             
             
         //     $(window).scroll(function () {
@@ -136,6 +160,16 @@ var testData = (function() {
 var clearList = function() {
   list.innerHTML = "";
 };
+
+
+function formSubmitted() {
+    // Get the values from input fields
+    let startRange = document.querySelector("#startRange").value;
+    let endRange = document.querySelector("#endRange").value;
+    displayInChunks(TOTAL_SIZE, endRange);
+   
+    return false;
+}
 
     </script>
 </body>
