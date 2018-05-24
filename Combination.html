@@ -41,7 +41,7 @@
             </div>
 
     <script>
-        const k_combinations = (set, k) => {
+        const k_combinations =  (set, k) => {
                 if (k > set.length || k <= 0) {
                     return []
                 }
@@ -55,10 +55,10 @@
                     }
                     return combs
                 }
-                for (let i = 0; i < set.length - k + 1; i++) {
+                for (let i = 0, len = set.length; i < len - k + 1; ++i) {
                     const head = set.slice(i, i + 1)
-                    const tailcombs = k_combinations(set.slice(i + 1), k - 1)
-                    for (let j = 0; j < tailcombs.length; j++) {
+                    const tailcombs =  k_combinations(set.slice(i + 1), k - 1)
+                    for (let j = 0, lenn = tailcombs.length; j < lenn; ++j) {
                         combs.push(head.concat(tailcombs[j]))
                     }
                 }
@@ -166,6 +166,9 @@ function formSubmitted() {
     // Get the values from input fields
     let startRange = document.querySelector("#startRange").value;
     let endRange = document.querySelector("#endRange").value;
+    if (endRange > 30)
+        endRange = 30;
+    
     displayInChunks(TOTAL_SIZE, endRange);
    
     return false;
