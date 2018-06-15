@@ -62,6 +62,7 @@
                         combs.push(head.concat(tailcombs[j]))
                     }
                 }
+                //console.log(combs);
                 return combs
             }
 
@@ -76,6 +77,8 @@
                 return combs
             }
 
+
+            
             // var i = 0;
             // var j = 0;
 
@@ -84,6 +87,11 @@
             * down or stop the loading of the page.
             */
             async function displaytable(combs){
+                // combs.forEach(function(comb) {
+                //     console.log(comb);
+                // });
+                console.log(combs);
+
                 let container = document.querySelector('#Combination');
 
                 container.innerHTML = "";
@@ -102,10 +110,10 @@
 
                 // j = i;
 
-                combs.forEach(function(comb) {
-                    let row = table.insertRow();
-                    row.innerHTML = "<td>" + comb + "</td>";
-                });
+                // combs.forEach(function(comb) {
+                //     let row = table.insertRow();
+                //     row.innerHTML = "<td>" + comb + "</td>";
+                // });
                 //adds the table to the div
                 await container.appendChild(table);
             }
@@ -166,8 +174,8 @@ function formSubmitted() {
     // Get the values from input fields
     let startRange = document.querySelector("#startRange").value;
     let endRange = document.querySelector("#endRange").value;
-    if (endRange > 30)
-        endRange = 30;
+    // if (endRange > 30)
+    //     endRange = 30;
     
     displayInChunks(TOTAL_SIZE, endRange);
    
